@@ -1,5 +1,5 @@
-import ReservationWizard from '@/components/reservation/ReservationWizard';
+import LandingPage from './pages/LandingPage';
 
-const Index = () => <ReservationWizard />;
+const Index = () => <LandingPage />;
 
 export default Index;
