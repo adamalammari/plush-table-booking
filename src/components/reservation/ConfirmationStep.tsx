@@ -7,9 +7,10 @@ import { CalendarDays, Clock, Users, MapPin, CheckCircle2 } from 'lucide-react';
 interface ConfirmationStepProps {
   data: ReservationData;
   confirmed: boolean;
+  reservationId?: string;
 }
 
-export default function ConfirmationStep({ data, confirmed }: ConfirmationStepProps) {
+export default function ConfirmationStep({ data, confirmed, reservationId }: ConfirmationStepProps) {
   if (confirmed) {
     return (
       <motion.div
@@ -28,7 +29,7 @@ export default function ConfirmationStep({ data, confirmed }: ConfirmationStepPr
         </motion.div>
         <h2 className="text-3xl font-display text-foreground mb-2">تم الحجز بنجاح!</h2>
         <p className="text-muted-foreground font-body mb-6">سنرسل لك تأكيداً على رقم هاتفك</p>
-        <div className="text-6xl font-display text-primary">#{Math.floor(Math.random() * 9000 + 1000)}</div>
+        <div className="text-4xl font-display text-primary">{reservationId}</div>
         <p className="text-xs text-muted-foreground mt-2 font-body">رقم الحجز الخاص بك</p>
       </motion.div>
     );
