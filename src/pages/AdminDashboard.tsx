@@ -32,12 +32,15 @@ import {
   CheckCircle,
   XCircle,
   Filter,
+  LogOut,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { useAuth } from '@/hooks/useAuth';
 
 type FilterStatus = 'all' | 'confirmed' | 'cancelled' | 'completed';
 
 export default function AdminDashboard() {
+  const { signOut, user } = useAuth();
   const [reservations, setReservations] = useState<StoredReservation[]>([]);
   const [search, setSearch] = useState('');
   const [filterStatus, setFilterStatus] = useState<FilterStatus>('all');
@@ -112,11 +115,23 @@ export default function AdminDashboard() {
             <div className="h-6 w-px bg-border" />
             <h1 className="text-xl font-display text-foreground">لوحة إدارة الحجوزات</h1>
           </div>
-          <Link to="/reserve">
-            <Button size="sm" className="gold-gradient text-primary-foreground font-semibold hover:opacity-90">
-              حجز جديد
+          <div className="flex items-center gap-3">
+            <span className="text-xs text-muted-foreground hidden sm:inline">{user?.email}</span>
+            <Link to="/reserve">
+              <Button size="sm" className="gold-gradient text-primary-foreground font-semibold hover:opacity-90">
+                حجز جديد
+              </Button>
+            </Link>
+            <Button
+              size="sm"
+              variant="ghost"
+              className="text-muted-foreground hover:text-destructive gap-1"
+              onClick={() => { signOut(); toast.success('تم تسجيل الخروج'); }}
+            >
+              <LogOut className="w-4 h-4" />
+              خروج
             </Button>
-          </Link>
+          </div>
         </div>
       </header>
 

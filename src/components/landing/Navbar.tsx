@@ -16,7 +16,7 @@ export default function Navbar() {
           <a href="#contact" className="hover:text-primary transition-colors">تواصل</a>
         </div>
         <div className="flex items-center gap-3">
-          <Link to="/admin">
+          <Link to="/login">
             <Button variant="ghost" size="sm" className="text-champagne/50 text-xs hover:text-primary">
               لوحة التحكم
             </Button>
