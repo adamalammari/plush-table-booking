@@ -32,8 +32,10 @@ import {
   CheckCircle,
   XCircle,
   Filter,
+  LogOut,
 } from 'lucide-react';
 import { toast } from 'sonner';
+import { useAuth } from '@/hooks/useAuth';
 
 type FilterStatus = 'all' | 'confirmed' | 'cancelled' | 'completed';
 
