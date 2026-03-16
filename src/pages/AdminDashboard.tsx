@@ -115,13 +115,23 @@ export default function AdminDashboard() {
             <div className="h-6 w-px bg-border" />
             <h1 className="text-xl font-display text-foreground">لوحة إدارة الحجوزات</h1>
           </div>
-          <Link to="/reserve">
-            <Button size="sm" className="gold-gradient text-primary-foreground font-semibold hover:opacity-90">
-              حجز جديد
+          <div className="flex items-center gap-3">
+            <span className="text-xs text-muted-foreground hidden sm:inline">{user?.email}</span>
+            <Link to="/reserve">
+              <Button size="sm" className="gold-gradient text-primary-foreground font-semibold hover:opacity-90">
+                حجز جديد
+              </Button>
+            </Link>
+            <Button
+              size="sm"
+              variant="ghost"
+              className="text-muted-foreground hover:text-destructive gap-1"
+              onClick={() => { signOut(); toast.success('تم تسجيل الخروج'); }}
+            >
+              <LogOut className="w-4 h-4" />
+              خروج
             </Button>
-          </Link>
-        </div>
-      </header>
+          </div>
 
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Stats Cards */}
