@@ -40,6 +40,7 @@ import { useAuth } from '@/hooks/useAuth';
 type FilterStatus = 'all' | 'confirmed' | 'cancelled' | 'completed';
 
 export default function AdminDashboard() {
+  const { signOut, user } = useAuth();
   const [reservations, setReservations] = useState<StoredReservation[]>([]);
   const [search, setSearch] = useState('');
   const [filterStatus, setFilterStatus] = useState<FilterStatus>('all');
