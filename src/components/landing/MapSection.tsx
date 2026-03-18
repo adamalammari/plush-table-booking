@@ -11,11 +11,11 @@ export default function MapSection() {
           <h2 className="text-4xl lg:text-5xl font-display text-foreground">كيف تصل إلينا</h2>
         </div>
         <div className="grid md:grid-cols-5 gap-8">
-          {/* Map */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
             className="md:col-span-3 rounded-2xl overflow-hidden border border-border shadow-lg h-[400px]"
           >
             <iframe
@@ -30,51 +30,31 @@ export default function MapSection() {
             />
           </motion.div>
 
-          {/* Info */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
             className="md:col-span-2 flex flex-col justify-center gap-6"
           >
             <div className="bg-card rounded-2xl p-6 border border-border">
-              <div className="flex items-start gap-4 mb-6">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                  <MapPin className="w-5 h-5 text-primary" />
+              {[
+                { icon: MapPin, title: 'العنوان', content: <><span>الرياض، حي الملقا</span><br /><span>شارع التخصصي، بجوار برج المملكة</span></> },
+                { icon: Phone, title: 'الهاتف', content: <span dir="ltr">+966 11 234 5678</span> },
+                { icon: Clock, title: 'ساعات العمل', content: <><span>الأحد - الخميس: ١٢ ظ - ١١ م</span><br /><span>الجمعة - السبت: ١ م - ١٢ ص</span></> },
+              ].map((item, i) => (
+                <div key={i} className={`flex items-start gap-4 ${i < 2 ? 'mb-6' : ''}`}>
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                    <item.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-display text-foreground mb-1">{item.title}</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed font-body">{item.content}</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-display text-foreground mb-1">العنوان</h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    الرياض، حي الملقا<br />
-                    شارع التخصصي، بجوار برج المملكة
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4 mb-6">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                  <Phone className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-display text-foreground mb-1">الهاتف</h4>
-                  <p className="text-sm text-muted-foreground" dir="ltr">+966 11 234 5678</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                  <Clock className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-display text-foreground mb-1">ساعات العمل</h4>
-                  <p className="text-sm text-muted-foreground">الأحد - الخميس: ١٢ ظ - ١١ م</p>
-                  <p className="text-sm text-muted-foreground">الجمعة - السبت: ١ م - ١٢ ص</p>
-                </div>
-              </div>
+              ))}
             </div>
-            <a
-              href="https://maps.google.com/?q=24.7636,46.6528"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://maps.google.com/?q=24.7636,46.6528" target="_blank" rel="noopener noreferrer">
               <Button className="w-full gold-gradient text-secondary font-display hover:opacity-90 py-6 text-base gap-2">
                 <Navigation className="w-4 h-4" />
                 افتح في خرائط قوقل

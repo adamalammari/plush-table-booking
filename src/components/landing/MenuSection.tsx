@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { ArrowUpLeft } from 'lucide-react';
 import dish1 from '@/assets/dish-1.jpg';
 import dish2 from '@/assets/dish-2.jpg';
 import dish3 from '@/assets/dish-3.jpg';
@@ -21,28 +22,31 @@ export default function MenuSection() {
           {menuItems.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="group bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/30 transition-all hover:shadow-xl"
+              transition={{ delay: i * 0.15, duration: 0.6 }}
+              className="group bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
             >
-              <div className="h-60 overflow-hidden relative">
+              <div className="h-64 overflow-hidden relative">
                 <img
                   src={item.img}
                   alt={item.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-                <span className="absolute top-4 right-4 bg-primary/90 text-secondary text-xs font-body px-3 py-1 rounded-full">
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <span className="absolute top-4 right-4 bg-primary text-primary-foreground text-xs font-body px-3 py-1.5 rounded-full">
                   {item.tag}
                 </span>
               </div>
               <div className="p-6">
                 <h3 className="font-display text-xl text-foreground mb-2">{item.name}</h3>
-                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{item.desc}</p>
+                <p className="text-sm text-muted-foreground mb-4 leading-relaxed font-body">{item.desc}</p>
                 <div className="flex items-center justify-between">
                   <span className="font-display text-primary text-xl">{item.price}</span>
-                  <span className="text-xs text-muted-foreground border border-border rounded-full px-3 py-1">عرض التفاصيل</span>
+                  <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                    <ArrowUpLeft className="w-4 h-4 text-primary group-hover:text-primary-foreground transition-colors" />
+                  </div>
                 </div>
               </div>
             </motion.div>
