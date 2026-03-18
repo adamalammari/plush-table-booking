@@ -1,8 +1,9 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import interiorImg from '@/assets/interior.jpg';
 import terraceImg from '@/assets/terrace.jpg';
 import dish1 from '@/assets/dish-1.jpg';
 import dish2 from '@/assets/dish-2.jpg';
+import { useRef } from 'react';
 
 const images = [
   { src: interiorImg, alt: 'القاعة الرئيسية', span: 'md:col-span-2 md:row-span-2' },
@@ -12,8 +13,12 @@ const images = [
 ];
 
 export default function GallerySection() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const y1 = useTransform(scrollYProgress, [0, 1], ['5%', '-5%']);
+
   return (
-    <section id="gallery" className="py-28 px-6 bg-background">
+    <section ref={ref} id="gallery" className="py-28 px-6 bg-background overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-primary text-sm tracking-[0.2em] uppercase mb-3 font-body">أجواء المطعم</p>
@@ -23,16 +28,17 @@ export default function GallerySection() {
           {images.map((img, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className={`overflow-hidden rounded-2xl ${img.span} ${i === 0 ? 'h-[300px] md:h-full' : 'h-[200px] md:h-[250px]'}`}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              className={`overflow-hidden rounded-2xl group cursor-pointer ${img.span} ${i === 0 ? 'h-[300px] md:h-full' : 'h-[200px] md:h-[250px]'}`}
             >
-              <img
+              <motion.img
+                style={i === 0 ? { y: y1 } : undefined}
                 src={img.src}
                 alt={img.alt}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                className={`w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ${i === 0 ? 'scale-110' : ''}`}
               />
             </motion.div>
           ))}

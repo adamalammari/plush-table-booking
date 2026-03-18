@@ -1,39 +1,63 @@
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, Sparkles } from 'lucide-react';
 import heroImg from '@/assets/hero-restaurant.jpg';
+import { useRef } from 'react';
 
 export default function HeroSection() {
   const navigate = useNavigate();
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '40%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
 
   return (
-    <section className="relative h-[100vh] flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0">
+    <section ref={ref} className="relative h-[100vh] flex items-center justify-center overflow-hidden">
+      <motion.div className="absolute inset-0" style={{ y, scale }}>
         <img src={heroImg} alt="المائدة الذهبية" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/60 to-secondary/30" />
-      </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-secondary via-secondary/70 to-secondary/20" />
+      </motion.div>
+
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+        style={{ opacity }}
         className="relative z-10 text-center px-6 max-w-3xl"
       >
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="text-champagne text-sm tracking-[0.4em] uppercase mb-6 font-body"
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-5 py-2 mb-8"
         >
-          تجربة طعام لا تُنسى
-        </motion.p>
-        <h1 className="text-5xl sm:text-7xl lg:text-8xl font-display text-secondary-foreground leading-tight mb-6">
+          <Sparkles className="w-4 h-4 text-primary" />
+          <span className="text-primary text-sm font-body tracking-wide">تجربة طعام لا تُنسى</span>
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 1 }}
+          className="text-5xl sm:text-7xl lg:text-8xl font-display text-secondary-foreground leading-tight mb-6"
+        >
           المائدة <span className="text-primary">الذهبية</span>
-        </h1>
-        <p className="text-champagne/80 text-lg sm:text-xl mb-10 font-light leading-relaxed max-w-xl mx-auto">
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+          className="text-secondary-foreground/70 text-lg sm:text-xl mb-10 font-light leading-relaxed max-w-xl mx-auto"
+        >
           حيث تلتقي الفخامة بفن الطهي العالمي. استمتع بتجربة استثنائية في أجواء ساحرة.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center"
+        >
           <Button
             onClick={() => navigate('/reserve')}
             size="lg"
@@ -45,15 +69,14 @@ export default function HeroSection() {
           <Button
             variant="outline"
             size="lg"
-            className="border-champagne/40 text-secondary-foreground hover:bg-champagne/10 font-body text-lg px-10 py-6"
+            className="border-secondary-foreground/20 text-secondary-foreground hover:bg-secondary-foreground/5 font-body text-lg px-10 py-6"
             onClick={() => document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' })}
           >
             استكشف القائمة
           </Button>
-        </div>
+        </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -63,7 +86,7 @@ export default function HeroSection() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
-          className="w-6 h-10 border-2 border-champagne/40 rounded-full flex justify-center pt-2"
+          className="w-6 h-10 border-2 border-secondary-foreground/30 rounded-full flex justify-center pt-2"
         >
           <div className="w-1.5 h-1.5 bg-primary rounded-full" />
         </motion.div>

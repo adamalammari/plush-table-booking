@@ -1,16 +1,21 @@
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Clock, MapPin } from 'lucide-react';
 import terraceImg from '@/assets/terrace.jpg';
+import { useRef } from 'react';
 
 export default function AboutSection() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const imgY = useTransform(scrollYProgress, [0, 1], ['10%', '-10%']);
+
   return (
-    <section id="about" className="py-28 px-6 bg-background">
+    <section ref={ref} id="about" className="py-28 px-6 bg-background overflow-hidden">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
+          initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
         >
           <p className="text-primary text-sm tracking-[0.2em] uppercase mb-3 font-body">قصتنا</p>
           <h2 className="text-4xl lg:text-5xl font-display text-foreground mb-6 leading-tight">
@@ -24,28 +29,36 @@ export default function AboutSection() {
           </p>
           <div className="flex gap-6 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                <Clock className="w-4 h-4 text-primary" />
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <Clock className="w-5 h-5 text-primary" />
               </div>
-              ١٢ ظ - ١١ م
+              <span>١٢ ظ - ١١ م</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                <MapPin className="w-4 h-4 text-primary" />
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <MapPin className="w-5 h-5 text-primary" />
               </div>
-              الرياض، حي الملقا
+              <span>الرياض، حي الملقا</span>
             </div>
           </div>
         </motion.div>
+
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
+          initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
           className="relative"
         >
-          <img src={terraceImg} alt="تراس المطعم" className="rounded-2xl w-full h-[450px] object-cover shadow-2xl" />
-          <div className="absolute -bottom-6 -right-6 w-36 h-36 border-2 border-primary/20 rounded-2xl" />
+          <div className="overflow-hidden rounded-2xl shadow-2xl">
+            <motion.img
+              style={{ y: imgY }}
+              src={terraceImg}
+              alt="تراس المطعم"
+              className="w-full h-[500px] object-cover scale-110"
+            />
+          </div>
+          <div className="absolute -bottom-6 -right-6 w-36 h-36 border-2 border-primary/15 rounded-2xl" />
           <div className="absolute -top-4 -left-4 w-20 h-20 border-2 border-primary/10 rounded-full" />
         </motion.div>
       </div>
