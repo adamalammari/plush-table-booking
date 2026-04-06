@@ -16,7 +16,7 @@ export default function MapSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="md:col-span-3 rounded-2xl overflow-hidden border border-border shadow-lg h-[400px]"
+            className="md:col-span-3 rounded-2xl overflow-hidden border border-border elegant-shadow h-[400px]"
           >
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3622.174!2d46.6528!3d24.7636!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2sAl%20Malqa%2C%20Riyadh!5e0!3m2!1sar!2ssa!4v1700000000000!5m2!1sar!2ssa"
@@ -55,7 +55,7 @@ export default function MapSection() {
               ))}
             </div>
             <a href="https://maps.google.com/?q=24.7636,46.6528" target="_blank" rel="noopener noreferrer">
-              <Button className="w-full gold-gradient text-secondary font-display hover:opacity-90 py-6 text-base gap-2">
+              <Button className="w-full gold-gradient text-background font-display hover:opacity-90 py-6 text-base gap-2">
                 <Navigation className="w-4 h-4" />
                 افتح في خرائط قوقل
               </Button>

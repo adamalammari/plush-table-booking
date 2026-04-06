@@ -39,7 +39,7 @@ export default function StatsBar() {
   const inView = useInView(ref, { once: true });
 
   return (
-    <section ref={ref} className="bg-secondary py-12 border-y border-primary/10">
+    <section ref={ref} className="bg-card py-12 border-y border-border">
       <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 px-6">
         {stats.map((stat, i) => (
           <motion.div
@@ -53,10 +53,10 @@ export default function StatsBar() {
             <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors duration-300">
               <stat.icon className="w-6 h-6 text-primary" />
             </div>
-            <div className="text-4xl font-display text-secondary-foreground">
+            <div className="text-4xl font-display text-foreground">
               <AnimatedCounter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} inView={inView} />
             </div>
-            <div className="text-xs text-secondary-foreground/50 mt-2 tracking-wide font-body">{stat.label}</div>
+            <div className="text-xs text-muted-foreground mt-2 tracking-wide font-body">{stat.label}</div>
           </motion.div>
         ))}
       </div>
