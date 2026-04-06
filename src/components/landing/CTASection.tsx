@@ -12,11 +12,11 @@ export default function CTASection() {
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
 
   return (
-    <section ref={ref} className="py-32 px-6 bg-secondary relative overflow-hidden">
-      <motion.div className="absolute inset-0 opacity-15" style={{ y: bgY }}>
-        <img src={heroImg} alt="" className="w-full h-full object-cover scale-110" />
+    <section ref={ref} className="py-32 px-6 relative overflow-hidden">
+      <motion.div className="absolute inset-0" style={{ y: bgY }}>
+        <img src={heroImg} alt="" className="w-full h-full object-cover scale-110" loading="lazy" />
+        <div className="absolute inset-0 bg-foreground/70" />
       </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-b from-secondary/50 via-transparent to-secondary/50" />
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -25,16 +25,16 @@ export default function CTASection() {
         transition={{ duration: 0.8 }}
         className="relative z-10 max-w-2xl mx-auto text-center"
       >
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display text-secondary-foreground mb-6">
+        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display text-background mb-6">
           احجز تجربتك الآن
         </h2>
-        <p className="text-secondary-foreground/60 mb-10 text-lg font-body">
+        <p className="text-background/65 mb-10 text-lg font-body">
           طاولتك في انتظارك. احجز الآن واستمتع بأمسية لا تُنسى.
         </p>
         <Button
           onClick={() => navigate('/reserve')}
           size="lg"
-          className="gold-gradient text-secondary font-display text-lg px-14 py-7 hover:opacity-90 transition-opacity"
+          className="gold-gradient text-background font-display text-lg px-14 py-7 hover:opacity-90 transition-opacity"
         >
           احجز طاولتك
           <ChevronLeft className="w-5 h-5 mr-2" />
